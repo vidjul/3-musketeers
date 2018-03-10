@@ -8,7 +8,8 @@ const currencies = require('../lib/currencies.json');
 const API = 'https://api.fixer.io/latest';
 
 /**
- * Convert an amount to other currencies.
+ * Convert an amount to other currencies and display it.
+ * @param {Object} configuration user input transfered by cash(command)
  */
 const convert = configuration => {
   const { amount, to, from, response, loading } = configuration;
@@ -38,10 +39,11 @@ const convert = configuration => {
 };
 
 /**
- * @description the result
- * @param {Object} commandj toto
- * @param {string} command.amount - The name of the employee.
- * @param {string} command.from - The employee's department.
+ * Pass user input to convert(configuration) 
+ * @param {Object} command user input
+ * @param {string} command.amount - The amount to be converted.
+ * @param {string} command.from - The initial currency.
+ * @param {Array} command.to - The target currencies.
  */
 
 const cash = async command => {

@@ -8,6 +8,10 @@ const config = new Conf();
 
 updateNotifier({pkg}).notify();
 
+/**
+ * Save the default currencies configuration entered by users
+ * @param {Array} argv - command line arguments
+ */
 const saveCurrencies = argv => {
   config.set('defaultFrom', argv[1] || config.get('defaultFrom', 'USD'));
   config.set(
@@ -20,11 +24,17 @@ const saveCurrencies = argv => {
   process.exit(1);
 };
 
+/**
+ * Display the current version of the tool.
+ */
 const version = () => {
   console.log(pkg.version);
   process.exit(1);
 };
 
+/**
+ * Display help, information about commands and examples.
+ */
 const help = () => {
   console.log(`
 Usage:
