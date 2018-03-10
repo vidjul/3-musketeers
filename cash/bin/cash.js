@@ -7,8 +7,11 @@ const currencies = require('../lib/currencies.json');
 
 const API = 'https://api.fixer.io/latest';
 
+/**
+ * Convert an amount to other currencies.
+ */
 const convert = configuration => {
-  const {amount, to, from, response, loading} = configuration;
+  const { amount, to, from, response, loading } = configuration;
 
   money.base = response.body.base;
   money.rates = response.body.rates;
@@ -17,7 +20,7 @@ const convert = configuration => {
     if (currencies[item]) {
       loading.succeed(
         `${chalk.green(
-          money.convert(amount, {from, 'to': item}).toFixed(2)
+          money.convert(amount, { from, 'to': item }).toFixed(2)
         )} ${`(${item})`} ${currencies[item]}`
       );
     } else {
@@ -33,6 +36,13 @@ const convert = configuration => {
   );
   process.exit(1);
 };
+
+/**
+ * @description the result
+ * @param {Object} commandj toto
+ * @param {string} command.amount - The name of the employee.
+ * @param {string} command.from - The employee's department.
+ */
 
 const cash = async command => {
   const amount = command.amount;
@@ -54,9 +64,9 @@ const cash = async command => {
   loading.start();
 
   try {
-    const response = await got(API, {'json': true});
+    const response = await got(API, { 'json': true });
 
-    convert({amount, to, from, response, loading});
+    convert({ amount, to, from, response, loading });
   } catch (err) {
     if (err.code === 'ENOTFOUND') {
       loading.fail(chalk.red('   Please check your internet connection.\n'));
