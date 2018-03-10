@@ -1,5 +1,12 @@
 #!/usr/bin/env node
 
+/**
+ * Parse command line arguments and call the appropriate function
+ * to display the result,
+ * helpers for displaying version, help and save configuration
+ * cash for converting currencies.
+ */
+
 const Conf = require('conf');
 const helpers = require('./helpers.js');
 const cash = require('./cash.js');
